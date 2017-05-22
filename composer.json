@@ -1,0 +1,16 @@
+{
+  "name": "notonpaper/docker",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Meijer",
+      "email": "peter@notonpaper.nl",
+      "homepage": "https://www.notonpaper.nl",
+      "role": "Developer"
+    }
+  ],
+  "bin": [
+    "bin/docker"
+  ]
+}
