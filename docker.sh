@@ -1,5 +1,6 @@
 #!/bin/sh
 MYSQLSTORAGE=~/Docker/mysqlStorage
+COMPOSE_FILE="vendor/notonpaper/docker/docker-compose.yml"
 
 # Check if the MySQL Storage exists, if not create the directory
 if [ ! -d $MYSQLSTORAGE ]; then
@@ -15,15 +16,15 @@ PROJECT="${DIR//-}"
 case $1 in
     up)
         echo "-- Starting Docker --"
-        docker-compose up -d
+        docker-compose -f $COMPOSE_FILE -p $PROJECT up -d
         ;;
     down)
         echo "-- Stopping Docker --"
-        docker-compose down
+        docker-compose -f $COMPOSE_FILE -p $PROJECT down
         ;;
     rebuild)
         echo "-- Rebuilding Docker --"
-        docker-compose kill && docker-compose build && docker-compose up -d
+        docker-compose -f $COMPOSE_FILE -p $PROJECT kill && docker-compose build && docker-compose up -d
         ;;
     artisan)
         CONTAINER="_php_1"
