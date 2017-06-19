@@ -11,12 +11,15 @@ fi
 # Get the current directory name without the fullpath
 DIR=${PWD##*/}
 PROJECT="${DIR//-}"
+UP_MESSAGE="\nOpen the site for $DIR on http://localhost:8080"
 
 # Now define which options we want to provide
 case $1 in
     up)
         echo "-- Starting Docker --"
         docker-compose -f $COMPOSE_FILE -p $PROJECT up -d
+
+        echo $UP_MESSAGE
         ;;
     down)
         echo "-- Stopping Docker --"
@@ -24,7 +27,11 @@ case $1 in
         ;;
     rebuild)
         echo "-- Rebuilding Docker --"
-        docker-compose -f $COMPOSE_FILE -p $PROJECT kill && docker-compose build && docker-compose up -d
+        docker-compose -f $COMPOSE_FILE -p $PROJECT kill \
+        && docker-compose -f $COMPOSE_FILE -p $PROJECT build \
+        && docker-compose -f $COMPOSE_FILE -p $PROJECT up -d
+
+        echo $UP_MESSAGE
         ;;
     artisan)
         CONTAINER="_php_1"

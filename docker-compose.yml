@@ -27,7 +27,7 @@ services:
         expose:
             - 9000
         volumes:
-            - .:/var/www/html
+            - ../../../:/var/www/html
 
 ###########################
 # Setup the testing container
@@ -41,6 +41,7 @@ services:
 # Setup the Database (MySQL) container
 ###########################
     mysql:
+        env_file: ../../../.env
         image: mysql:latest
         ports:
           - "3307:3306"
